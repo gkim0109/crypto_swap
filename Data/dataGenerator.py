@@ -42,6 +42,11 @@ class dataGenerator():
         csvfile.close()
 
     def getHistoryChartData(self):
+
         json_list = self.poloniexClass.api_query("returnChartData", {"currencyPair": self.currencyPair}, self.period,
                                             self.start, self.end)
+        while(json_list == "error"):
+            json_list = self.poloniexClass.api_query("returnChartData", {"currencyPair": self.currencyPair}, self.period,
+                                            self.start, self.end)
         return json_list
+
